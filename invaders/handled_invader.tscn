@@ -1,0 +1,146 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://invaders/handled_invader.gd" type="Script" id=1]
+[ext_resource path="res://invaders/invader.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/textures/SpaceInvaders.png" type="Texture" id=3]
+[ext_resource path="res://assets/textures/particle.png" type="Texture" id=4]
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 3 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 16, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 3 )
+region = Rect2( 16, 16, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 32, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 3 )
+region = Rect2( 16, 32, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 48, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 3 )
+region = Rect2( 16, 48, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 64, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 3 )
+region = Rect2( 16, 64, 16, 16 )
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="Animation" id=17]
+resource_name = "rescue"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("RescueArea/RescueCollisionPoly:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.5, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("RescueArea/Particles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Gradient" id=15]
+interpolation_mode = 2
+offsets = PoolRealArray( 0, 0.559441 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=16]
+gradient = SubResource( 15 )
+width = 1000
+
+[sub_resource type="ParticlesMaterial" id=14]
+flag_disable_z = true
+direction = Vector3( 0, 0, 0 )
+spread = 15.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 36.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+damping = 16.0
+color_ramp = SubResource( 16 )
+
+[node name="HandledInvader" instance=ExtResource( 2 )]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_horizontal_guides_": [ 3.0, 29.0 ],
+"_edit_lock_": true
+}
+
+[node name="AnimatedSprite" parent="." index="0"]
+frames = SubResource( 1 )
+
+[node name="CollisionShape2D" parent="." index="1"]
+visible = false
+
+[node name="FireTimer" type="Timer" parent="." index="3"]
+wait_time = 0.25
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
+anims/rescue = SubResource( 17 )
+
+[node name="RescueArea" type="Area2D" parent="." index="5"]
+collision_layer = 0
+collision_mask = 16
+
+[node name="RescueCollisionPoly" type="CollisionPolygon2D" parent="RescueArea" index="0"]
+polygon = PoolVector2Array( 0, 3, 8, 32, -8, 32 )
+disabled = true
+
+[node name="Particles2D" type="Particles2D" parent="RescueArea" index="1"]
+position = Vector2( 0, 3 )
+rotation = 1.5708
+emitting = false
+amount = 400
+lifetime = 2.0
+one_shot = true
+explosiveness = 0.2
+randomness = 1.0
+visibility_rect = Rect2( 0, 0, 1, 1 )
+process_material = SubResource( 14 )
+texture = ExtResource( 4 )
+
+[connection signal="timeout" from="FireTimer" to="." method="_on_FireTimer_timeout"]
+[connection signal="area_entered" from="RescueArea" to="." method="_on_RescueArea_area_entered"]

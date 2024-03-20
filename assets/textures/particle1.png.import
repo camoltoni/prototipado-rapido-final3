@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/laser_invader.png-7e818a1d3b103b1149004cfc30dca86a.stex"
+path="res://.import/particle1.png-419e7a52f2c1d714a156e0f7c8c001f1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/laser_invader.png"
-dest_files=[ "res://.import/laser_invader.png-7e818a1d3b103b1149004cfc30dca86a.stex" ]
+source_file="res://assets/textures/particle1.png"
+dest_files=[ "res://.import/particle1.png-419e7a52f2c1d714a156e0f7c8c001f1.stex" ]
 
 [params]
 
