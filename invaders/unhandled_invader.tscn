@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://invaders/invader.tscn" type="PackedScene" id=1]
 [ext_resource path="res://invaders/unhandled_invader.gd" type="Script" id=2]
 [ext_resource path="res://assets/textures/SpaceInvaders.png" type="Texture" id=3]
+[ext_resource path="res://assets/sfx/lose03.ogg" type="AudioStream" id=4]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 3 )
@@ -64,12 +65,6 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="CollisionShape2D" parent="." index="1"]
-__meta__ = {
-"_edit_group_": true,
-"_edit_lock_": true
-}
-
 [node name="FirePosition" parent="." index="2"]
 __meta__ = {
 "_edit_group_": true,
@@ -78,5 +73,10 @@ __meta__ = {
 
 [node name="FireTimer" type="Timer" parent="." index="3"]
 
+[node name="AudioStreamPlayer" parent="DieComponent" index="2"]
+stream = ExtResource( 4 )
+
 [connection signal="input_event" from="." to="." method="_on_UnhandledInvader_input_event"]
 [connection signal="timeout" from="FireTimer" to="." method="_on_FireTimer_timeout"]
+
+[editable path="DieComponent"]

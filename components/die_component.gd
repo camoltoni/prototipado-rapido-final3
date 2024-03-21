@@ -1,36 +1,31 @@
+class_name DieComponent
 extends Node2D
 
 signal died
 
-export var particle_texture:StreamTexture
-export var sound:AudioStream
-
 onready var particles_2d:Particles2D = $Particles2D
 onready var tween:Tween = $Tween
-onready var audio_stream_player_2d:AudioStreamPlayer2D = $AudioStreamPlayer2D
+onready var audio_stream_player:AudioStreamPlayer = $AudioStreamPlayer
 
 func _ready():
-	particles_2d.texture = particle_texture
-	audio_stream_player_2d.stream = sound
-	assert(tween.connect(
-		"tween_completed", self, "_died") == OK,
+	assert(audio_stream_player.connect("finished", self, "_died") == OK,
 		"Signal not connected")
 
-func start():
-	create_tween()
+func start(sprite):
 	particles_2d.emitting = true
-	tween.start()
-	audio_stream_player_2d.play()
+	audio_stream_player.play()
+	make_tween(sprite)
+	assert(tween.start() == true, "Tween not started")
 
-
-func _died(_object, _key):
+func _died():
 	emit_signal("died")
 
-func create_tween():
+func make_tween(sprite):
+	particles_2d.modulate = sprite.modulate
 	assert(tween.interpolate_property(
-		owner, 
-		"modulate", 
-		owner.modulate, 
-		Color("#0fff"), 
+		sprite, 
+		"modulate:a", 
+		1.0, 
+		0.0, 
 		0.2, 
-		Tween.TRANS_CUBIC,Tween.EASE_IN)==true)
+		Tween.TRANS_CUBIC,Tween.EASE_IN) == true, "Tween not started")

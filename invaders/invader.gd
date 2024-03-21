@@ -11,6 +11,10 @@ export var laser_collision_layer:int = 4
 onready var initial_position = position
 onready var view_rect = get_viewport_rect()
 onready var fire_position = $FirePosition
+onready var die_component:DieComponent = $DieComponent
+onready var animated_sprite:AnimatedSprite = $AnimatedSprite
+onready var laser_collision_shape:CollisionShape2D = $LaserCollisionShape
+onready var audio_stream_player:AudioStreamPlayer = $AudioStreamPlayer
 
 const INVADER_COLOR = Color.ghostwhite
 const INVADER_SELECTED_COLOR = Color.lawngreen
@@ -18,6 +22,11 @@ const ACCELERATION: = 40.0
 const MARGIN: = Vector2(8.0, 8.0)
 
 var unhandled = null
+
+func _ready():
+	assert(die_component.connect(
+		"died", self, "_on_died") == OK, 
+		"Signal not connected")
 
 func _physics_process(_delta):
 	global_position.x = clamp(global_position.x, view_rect.position.x, view_rect.end.x + MARGIN.x)
@@ -29,11 +38,16 @@ func fire():
 	laser.collision_layer = laser_collision_layer
 	laser.laser_speed = self.laser_speed
 	get_tree().current_scene.add_child(laser)
-
+	audio_stream_player.play()
+	
 
 func _on_Invader_area_entered(_area):
 	emit_signal("invader_hit")
+	laser_collision_shape.set_deferred("disabled", true)
+	die_component.start(animated_sprite)
+
+func _on_died():
 	if is_instance_valid(unhandled) and unhandled != null:
 		unhandled.queue_free()
 	queue_free()
-	pass # Replace with function body.
+

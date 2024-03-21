@@ -1,16 +1,22 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://invaders/invader_grid.tscn" type="PackedScene" id=1]
 [ext_resource path="res://enemies/obstacles.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Main.gd" type="Script" id=3]
 [ext_resource path="res://enemies/enemies.tscn" type="PackedScene" id=4]
 [ext_resource path="res://invaders/UFO.tscn" type="PackedScene" id=5]
+[ext_resource path="res://ui/HUD.tscn" type="PackedScene" id=6]
+[ext_resource path="res://background/ParallaxBackground.tscn" type="PackedScene" id=7]
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_horizontal_guides_": [ 162.0 ]
 }
+
+[node name="ParallaxBackground" parent="." instance=ExtResource( 7 )]
+
+[node name="HUD" parent="." instance=ExtResource( 6 )]
 
 [node name="InvaderGrid" parent="." instance=ExtResource( 1 )]
 

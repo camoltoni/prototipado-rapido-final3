@@ -1,15 +1,33 @@
 extends Node2D
 
+onready var hud = $HUD
+
 var score:int = 0
 var lifes:int = 40
+var rescued:int = 5
 
-func _on_enemy_hit():
-	score += 1
-	print_debug("score:", score)
+func _ready():
+	hud.update_lifes(lifes)
+	hud.update_rescued(rescued)
+	hud.update_score(score)
+
+func _on_enemy_hit(value):
+	score += value
+	hud.update_score(score)
 
 func _on_invader_hit():
 	lifes -= 1
-	print_debug("lifes:", lifes)
+	hud.update_lifes(lifes)
 
 func _on_ufo_hit():
-	print_debug("ufo down")
+	score -= 100
+	hud.update_score(score)
+
+func _on_ufo_rescued():
+	score += 1000
+	rescued -= 1
+	hud.update_score(score)
+	hud.update_rescued(rescued)
+	if rescued <= 0:
+		Global.final_score = score
+		pass

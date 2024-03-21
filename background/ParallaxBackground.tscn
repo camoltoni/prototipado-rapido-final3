@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/background/SpaceInvaders_Background.png" type="Texture" id=1]
+[ext_resource path="res://assets/background/SpaceInvaders_BackgroundBuildings.png" type="Texture" id=2]
+
+[node name="ParallaxBackground" type="ParallaxBackground"]
+
+[node name="SkyLayer" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.1, 1 )
+motion_mirroring = Vector2( 320, 0 )
+
+[node name="Sprite" type="Sprite" parent="SkyLayer"]
+texture = ExtResource( 1 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 320, 320 )
+
+[node name="CityLayer" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.2, 1 )
+motion_mirroring = Vector2( 320, 0 )
+
+[node name="Sprite" type="Sprite" parent="CityLayer"]
+position = Vector2( 0, 98 )
+texture = ExtResource( 2 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 320, 64 )

@@ -42,4 +42,4 @@ texture = ExtResource( 1 )
 
 [node name="Tween" type="Tween" parent="."]
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

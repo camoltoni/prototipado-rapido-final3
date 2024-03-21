@@ -7,12 +7,11 @@ signal handling
 
 export var dancing_frames: = [0,1]
 
-onready var animated_sprite:AnimatedSprite = $AnimatedSprite
 onready var frames:SpriteFrames = animated_sprite.frames
-onready var collision_shape_2d:CollisionShape2D = $CollisionShape2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	animated_sprite.modulate = INVADER_COLOR
 	frames.add_animation(name)
 	frames.set_animation_speed(name, 4.0)
 	for n in dancing_frames:
@@ -29,7 +28,7 @@ func _ready():
 
 func _on_UnhandledInvader_input_event(_viewport, event, _shape_idx):
 	if (event is InputEventMouseButton && event.pressed):
-		collision_shape_2d.disabled = true
+		laser_collision_shape.disabled = true
 		visible = false
 		emit_signal("handling", self)
 

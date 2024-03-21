@@ -1,0 +1,63 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://ui/space_invaders_font_small.tres" type="DynamicFont" id=1]
+[ext_resource path="res://ui/HUD.gd" type="Script" id=2]
+
+[node name="HUD" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+anchor_right = 1.0
+margin_bottom = 8.0
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/HBoxContainer"]
+margin_bottom = 8.0
+
+[node name="LabelRescued" type="Label" parent="CanvasLayer/HBoxContainer"]
+margin_left = 4.0
+margin_right = 36.0
+margin_bottom = 8.0
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 1 )
+text = "RESCUED: 000"
+valign = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/HBoxContainer"]
+margin_left = 40.0
+margin_right = 40.0
+margin_bottom = 8.0
+size_flags_horizontal = 2
+
+[node name="LabelScore" type="Label" parent="CanvasLayer/HBoxContainer"]
+margin_left = 128.0
+margin_right = 169.0
+margin_bottom = 8.0
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 1 )
+text = "SCORE: 00000000"
+valign = 1
+
+[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/HBoxContainer"]
+margin_left = 173.0
+margin_right = 173.0
+margin_bottom = 8.0
+size_flags_horizontal = 2
+
+[node name="LabelLifes" type="Label" parent="CanvasLayer/HBoxContainer"]
+margin_left = 262.0
+margin_right = 284.0
+margin_bottom = 8.0
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 1 )
+text = "LIFES: 00"
+valign = 1
+
+[node name="MarginContainer4" type="MarginContainer" parent="CanvasLayer/HBoxContainer"]
+margin_left = 288.0
+margin_right = 288.0
+margin_bottom = 8.0

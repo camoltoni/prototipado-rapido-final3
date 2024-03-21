@@ -1,9 +1,10 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://invaders/handled_invader.gd" type="Script" id=1]
 [ext_resource path="res://invaders/invader.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/textures/SpaceInvaders.png" type="Texture" id=3]
 [ext_resource path="res://assets/textures/particle.png" type="Texture" id=4]
+[ext_resource path="res://assets/sfx/lose02.ogg" type="AudioStream" id=5]
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 3 )
@@ -55,7 +56,7 @@ animations = [ {
 
 [sub_resource type="Animation" id=17]
 resource_name = "rescue"
-length = 3.0
+length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("RescueArea/RescueCollisionPoly:disabled")
 tracks/0/interp = 1
@@ -63,7 +64,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0.5, 3 ),
+"times": PoolRealArray( 0.2, 2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ false, true ]
@@ -75,7 +76,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 3 ),
+"times": PoolRealArray( 0, 2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
@@ -112,9 +113,6 @@ __meta__ = {
 [node name="AnimatedSprite" parent="." index="0"]
 frames = SubResource( 1 )
 
-[node name="CollisionShape2D" parent="." index="1"]
-visible = false
-
 [node name="FireTimer" type="Timer" parent="." index="3"]
 wait_time = 0.25
 
@@ -122,7 +120,7 @@ wait_time = 0.25
 anims/rescue = SubResource( 17 )
 
 [node name="RescueArea" type="Area2D" parent="." index="5"]
-collision_layer = 0
+collision_layer = 32
 collision_mask = 16
 
 [node name="RescueCollisionPoly" type="CollisionPolygon2D" parent="RescueArea" index="0"]
@@ -142,5 +140,10 @@ visibility_rect = Rect2( 0, 0, 1, 1 )
 process_material = SubResource( 14 )
 texture = ExtResource( 4 )
 
+[node name="AudioStreamPlayer" parent="DieComponent" index="2"]
+stream = ExtResource( 5 )
+
 [connection signal="timeout" from="FireTimer" to="." method="_on_FireTimer_timeout"]
 [connection signal="area_entered" from="RescueArea" to="." method="_on_RescueArea_area_entered"]
+
+[editable path="DieComponent"]

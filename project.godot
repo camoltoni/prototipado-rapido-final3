@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node2D",
+"class": "DieComponent",
+"language": "GDScript",
+"path": "res://components/die_component.gd"
+}, {
 "base": "Invader",
 "class": "HandledInvader",
 "language": "GDScript",
@@ -35,6 +40,7 @@ _global_script_classes=[ {
 "path": "res://invaders/unhandled_invader.gd"
 } ]
 _global_script_class_icons={
+"DieComponent": "",
 "HandledInvader": "",
 "Invader": "",
 "Laser": "",
@@ -45,8 +51,12 @@ _global_script_class_icons={
 [application]
 
 config/name="Proyecto Final Prototipado Rápido"
-run/main_scene="res://Main.tscn"
-config/icon="res://icon.png"
+run/main_scene="res://screens/title_scene.tscn"
+config/icon="res://assets/GameIcon.png"
+
+[autoload]
+
+Global="*res://components/global.gd"
 
 [display]
 
@@ -83,6 +93,10 @@ texture={
 "size_limit": 0,
 "stream": false,
 "svg/scale": 1.0
+}
+ogg_vorbis={
+"loop": false,
+"loop_offset": 0
 }
 
 [input]
@@ -127,6 +141,7 @@ rescue={
 2d_physics/layer_3="laser_invader"
 2d_physics/layer_4="laser_enemy"
 2d_physics/layer_5="ufo"
+2d_physics/layer_6="ufo_area"
 
 [physics]
 
