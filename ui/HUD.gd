@@ -6,7 +6,7 @@ onready var label_lifes:Label = $CanvasLayer/HBoxContainer/LabelLifes
 
 
 func update_rescued(value:int):
-	label_rescued.text = "RESCUED: "+ str(value)
+	label_rescued.text = "TO BE RESCUED: "+ str(value)
 
 func update_score(value:int):
 	label_score.text = "SCORE: " + "%08d" % value

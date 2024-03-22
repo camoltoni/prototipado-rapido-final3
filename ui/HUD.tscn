@@ -20,22 +20,22 @@ margin_bottom = 8.0
 
 [node name="LabelRescued" type="Label" parent="CanvasLayer/HBoxContainer"]
 margin_left = 4.0
-margin_right = 36.0
+margin_right = 50.0
 margin_bottom = 8.0
 size_flags_vertical = 1
 custom_fonts/font = ExtResource( 1 )
-text = "RESCUED: 000"
+text = "TO BE RESCUED: 000"
 valign = 1
 
 [node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/HBoxContainer"]
-margin_left = 40.0
-margin_right = 40.0
+margin_left = 54.0
+margin_right = 54.0
 margin_bottom = 8.0
 size_flags_horizontal = 2
 
 [node name="LabelScore" type="Label" parent="CanvasLayer/HBoxContainer"]
-margin_left = 128.0
-margin_right = 169.0
+margin_left = 135.0
+margin_right = 176.0
 margin_bottom = 8.0
 size_flags_vertical = 1
 custom_fonts/font = ExtResource( 1 )
@@ -43,8 +43,8 @@ text = "SCORE: 00000000"
 valign = 1
 
 [node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/HBoxContainer"]
-margin_left = 173.0
-margin_right = 173.0
+margin_left = 180.0
+margin_right = 180.0
 margin_bottom = 8.0
 size_flags_horizontal = 2
 

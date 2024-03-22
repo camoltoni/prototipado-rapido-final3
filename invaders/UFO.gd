@@ -57,4 +57,5 @@ func rescued():
 		0.3, Tween.TRANS_CUBIC, 
 		Tween.EASE_IN) == true)
 	assert(tween.start() == true)
+	audio_stream_player_2d.stop()
 	rescue_stream.play()

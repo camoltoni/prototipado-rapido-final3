@@ -18,6 +18,9 @@ func _on_enemy_hit(value):
 func _on_invader_hit():
 	lifes -= 1
 	hud.update_lifes(lifes)
+	if lifes <= 0:
+		Global.message = "YOU LOSE"
+		assert(get_tree().change_scene("res://screens/end_screen.tscn") == OK)
 
 func _on_ufo_hit():
 	score -= 100
@@ -30,4 +33,5 @@ func _on_ufo_rescued():
 	hud.update_rescued(rescued)
 	if rescued <= 0:
 		Global.final_score = score
-		pass
+		Global.message = "YOU WIN!\n" + "%d" % Global.final_score
+		assert(get_tree().change_scene("res://screens/end_screen.tscn") == OK)
