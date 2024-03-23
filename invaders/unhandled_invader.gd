@@ -33,6 +33,6 @@ func _on_UnhandledInvader_input_event(_viewport, event, _shape_idx):
 		emit_signal("handling", self)
 
 func _on_FireTimer_timeout():
-	if randf() < 0.15:
+	if randf() < 0.0:
 		fire()
 	fire_timer.start(rand_range(1.0, 3.0))

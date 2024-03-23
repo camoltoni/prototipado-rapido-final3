@@ -36,19 +36,18 @@ func fire():
 	get_tree().current_scene.add_child(laser)
 	audio_stream_player.play()
 
-func _process(_delta):
-	position = position * Vector2(direction, 1)
-
 func _move():
 	animation_player.play("move", -1, rand_range(0.5, 1.15))
 	if randf() < 0.5:
-		direction = -1
+		animation_player.seek(animation_player.current_animation_length/2.0)
+		
 
 func _on_AnimationTimer_timeout():
 	animation_player.playback_speed = rand_range(0.5, 1.15)
 	animation_timer.start(rand_range(2.5, 5.0))
 	
 func _on_Area2D_area_entered(_area):
+	animation_player.stop()
 	animation_player.play("respawn", -1, rand_range(1.0, 2.0))
 	die_component.start(sprite)
 
